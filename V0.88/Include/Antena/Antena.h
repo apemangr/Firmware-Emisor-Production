@@ -613,6 +613,7 @@ static void nus_data_handler(ble_nus_evt_t *p_evt)
             Tipo_Envio    = Values;
             Next_Sending  = true;
             loop_send_med = 0;
+            Next_Transmition();
         }
 
         // 97 Limpia historia
@@ -1586,7 +1587,7 @@ static void advertising_init(void)
 
             if (History_Position >= (Size_Memory_History - 1))
             {
-                History_Buffer_Full = true;  // Marcar el buffer como lleno
+                History_Buffer_Full = true; // Marcar el buffer como lleno
                 NRF_LOG_RAW_INFO("BUFFER DE HISTORIAL LLENO - No se guardaran mas registros\r\n");
                 NRF_LOG_FLUSH();
             }
@@ -1598,7 +1599,7 @@ static void advertising_init(void)
         {
             NRF_LOG_RAW_INFO("Intento de escritura rechazado - Buffer de historial lleno\r\n");
             NRF_LOG_FLUSH();
-            Another_Value = false;  // Resetear para evitar intentos repetitivos
+            Another_Value = false; // Resetear para evitar intentos repetitivos
         }
     }
 
@@ -1694,7 +1695,7 @@ static void advertising_init(void)
     ble_advdata_manuf_data_t manuf_specific_data;
 
     manuf_specific_data.company_identifier =
-        0xFECA; // se escribe al revez ... numero de compañia 3322
+        0x2233; // se escribe al revez ... numero de compañia 3322
     manuf_specific_data.data.p_data = (uint8_t *)m_beacon_info;
     manuf_specific_data.data.size   = sizeof(m_beacon_info);
 
